@@ -2,6 +2,7 @@ from pathlib import Path
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 try:
     from .database import Base, engine, SessionLocal
@@ -105,5 +106,16 @@ def seed(session: Session = Depends(db)):
 FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
 if not FRONTEND_DIR.exists() and (Path(__file__).resolve().parent / "index.html").exists():
     FRONTEND_DIR = Path(__file__).resolve().parent
+ANGULAR_DIST = FRONTEND_DIR / "dist" / "shree-puja-samagri" / "browser"
+if ANGULAR_DIST.exists():
+    FRONTEND_DIR = ANGULAR_DIST
+
+@app.get("/", include_in_schema=False)
+def storefront():
+    index_file = FRONTEND_DIR / "index.html"
+    if not index_file.exists():
+        return {"status": "ok", "message": "Sri Puja Mart API is running"}
+    return FileResponse(index_file)
+
 if FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
