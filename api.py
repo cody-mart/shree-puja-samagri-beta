@@ -11,8 +11,12 @@ from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from .database import SessionLocal
-from .models import Order, OrderItem, Product, User
+try:
+    from .database import SessionLocal
+    from .models import Order, OrderItem, Product, User
+except ImportError:
+    from database import SessionLocal
+    from models import Order, OrderItem, Product, User
 
 router = APIRouter(prefix="/api")
 TOKEN_SECRET = os.getenv("SESSION_SECRET", "change-this-session-secret")

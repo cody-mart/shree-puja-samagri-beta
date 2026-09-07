@@ -3,9 +3,14 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
-from .database import Base, engine, SessionLocal
-from .models import Product, ProductItem
-from .api import router as commerce_router
+try:
+    from .database import Base, engine, SessionLocal
+    from .models import Product, ProductItem
+    from .api import router as commerce_router
+except ImportError:
+    from database import Base, engine, SessionLocal
+    from models import Product, ProductItem
+    from api import router as commerce_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -98,5 +103,7 @@ def seed(session: Session = Depends(db)):
     return {"message": "Seeded", "id": p.id}
 
 FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
+if not FRONTEND_DIR.exists() and (Path(__file__).resolve().parent / "index.html").exists():
+    FRONTEND_DIR = Path(__file__).resolve().parent
 if FRONTEND_DIR.exists():
     app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
