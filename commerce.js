@@ -24,7 +24,7 @@ function panel(title, content) {
   document.querySelector('.commerce-panel')?.remove();
   const element = document.createElement('section');
   element.className = 'commerce-panel';
-  element.innerHTML = `<div class="commerce-sheet"><button class="panel-close" aria-label="Close">×</button><p class="eyebrow">Shree Puja Samagri</p><h2>${title}</h2><div class="panel-content">${content}</div></div>`;
+  element.innerHTML = `<div class="commerce-sheet"><button class="panel-close" aria-label="Close">×</button><p class="eyebrow">Sri Puja Mart</p><h2>${title}</h2><div class="panel-content">${content}</div></div>`;
   document.body.append(element);
   element.addEventListener('click', (event) => { if (event.target === element || event.target.closest('.panel-close')) element.remove(); });
   return element;
