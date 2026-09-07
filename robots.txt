@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shree-puja-samagri-beta.onrender.com/sitemap.xml

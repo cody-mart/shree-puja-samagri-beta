@@ -1,0 +1,94 @@
+:root {
+  --maroon: #7d0c13;
+  --terracotta: #a9322b;
+  --gold: #c99a3d;
+}
+
+.site-header {
+  border-bottom: 1px solid #eadbc5;
+  position: relative;
+}
+
+.site-header::after {
+  background: var(--gold);
+  bottom: -2px;
+  content: '';
+  height: 3px;
+  left: 36px;
+  position: absolute;
+  width: 45px;
+}
+
+.brand-logo {
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: block;
+  height: 52px;
+  object-fit: cover;
+  width: 52px;
+}
+
+.brand-english {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.brand-english small {
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  margin-top: 6px;
+}
+
+.brand-logo + .brand-english {
+  min-width: 170px;
+}
+
+.brand-logo[alt] {
+  color: transparent;
+  font-size: 0;
+}
+
+.brand-logo {
+  height: 43px;
+  width: 43px;
+}
+
+.hero h1,
+.section-heading h2,
+.promise h2,
+.product-info h3 {
+  font-family: var(--serif);
+  line-height: 1.02;
+}
+
+.hero h1 em {
+  font-family: var(--serif);
+}
+
+.featured-product {
+  border-top: 3px solid var(--gold);
+}
+
+.promise {
+  background-color: var(--maroon);
+  background-image: radial-gradient(circle at 8% 18%, #c99a3d22 0 2px, transparent 3px), radial-gradient(circle at 92% 80%, #c99a3d22 0 2px, transparent 3px);
+}
+
+.site-footer {
+  background: #41090e;
+}
+
+@media (max-width: 430px) {
+  .brand-logo {
+    height: 39px;
+    width: 39px;
+  }
+
+  .brand-english {
+    font-size: 17px;
+  }
+}
