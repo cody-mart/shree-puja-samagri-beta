@@ -1,6 +1,9 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, Float, Boolean
 from datetime import datetime
-from .database import Base
+try:
+    from .database import Base
+except ImportError:
+    from database import Base
 
 class Product(Base):
     __tablename__ = "products"
